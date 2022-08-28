@@ -44,7 +44,9 @@ const anotherEmployee = () => {
   inquirer.prompt([
     {
       type: 'list',
-      message: 'would you like to add '
+      message: 'would you like to add any more team members?',
+      name: 'addEmployee',
+      choices: ['Engineer', 'Intern'],
     }
   ])
 }

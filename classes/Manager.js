@@ -8,8 +8,5 @@ class Manager extends Employee {
   }
 }
 
-// const test = new Manager('tyler', 72, 'test@gmail.com', 420)
-
-// console.log(test);
 
 module.exports = Manager;
