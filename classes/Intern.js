@@ -1,4 +1,4 @@
-import Employee from "./Employee.js";
+const Employee = require("./Employee.js");
 
 class Intern extends Employee {
   constructor(name, id, email, school) {
@@ -23,4 +23,4 @@ class Intern extends Employee {
   }
 }
 
-export default Intern;
+module.exports = Intern

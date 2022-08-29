@@ -1,8 +1,8 @@
-import  inquirer  from 'inquirer';
-import fs from 'fs';
-import Manager from './classes/Manager.js';
-import Intern from './classes/Intern.js';
-import Engineer from './classes/Engineer.js';
+const inquirer = require('inquirer');
+const fs = require('fs');
+const Manager = require('./classes/Manager.js');
+const Intern = require('./classes/Intern.js');
+const Engineer = require('./classes/Engineer.js');
 const employees = [];
 
 const init = () => {

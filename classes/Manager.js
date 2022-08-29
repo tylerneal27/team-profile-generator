@@ -1,4 +1,4 @@
-import Employee from "./Employee.js";
+const Employee = require("./Employee.js");
 
 class Manager extends Employee {
   constructor(name, id, email, officeNumber) {
@@ -20,4 +20,4 @@ class Manager extends Employee {
   }
 }
 
-export default Manager;
+module.exports = Manager;
