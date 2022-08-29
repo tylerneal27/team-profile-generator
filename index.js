@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Manager = require('./classes/Manager.js');
-const Intern = require('./classes/Intern.js');
-const Engineer = require('./classes/Engineer.js');
+const Manager = require('./lib/Manager.js');
+const Intern = require('./lib/Intern.js');
+const Engineer = require('./lib/Engineer.js');
 const employees = [];
 
 const init = () => {

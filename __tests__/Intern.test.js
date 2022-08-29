@@ -1,4 +1,4 @@
-const Intern = require("../Intern.js");
+const Intern = require("../lib/Intern.js");
 
 describe('Intern', () => {
     const internName = 'tyler';
@@ -17,5 +17,8 @@ describe('Intern', () => {
     });
     it("should get the school", () => {
         expect(intern.getSchool()).toEqual(school)
-    })
+    });
+    it("should get the role", () => {
+        expect(intern.getRole()).toEqual('Intern')
+    });
 })
