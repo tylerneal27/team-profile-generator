@@ -19,5 +19,6 @@
   "homepage": "https://github.com/tylerneal27/team-profile-generator#readme",
   "dependencies": {
     "inquirer": "^8.2.4"
-  }
+  },
+  "type": "module"
 }
