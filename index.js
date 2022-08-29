@@ -3,7 +3,6 @@ import fs from 'fs';
 import Manager from './classes/Manager.js';
 import Intern from './classes/Intern.js';
 import Engineer from './classes/Engineer.js';
-import Employee from './classes/Employee.js';
 const employees = [];
 
 const init = () => {
@@ -31,11 +30,9 @@ const init = () => {
       name: 'managerOfficeNumber'
     },
   ]).then((managerPrompt) => {
-    console.log(managerPrompt);
     const {managerName, managerId, managerEmail, managerOfficeNumber} = managerPrompt;
     const manager = new Manager(managerName, managerId, managerEmail, managerOfficeNumber);
     employees.push(manager);
-    console.log(employees);
     anotherEmployee();
   })
 }
@@ -53,14 +50,18 @@ const anotherEmployee = () => {
   ]).then((teamPrompt) => {
 
     if (teamPrompt.employeeType === 'Engineer') {
-      const engineer = promptEngineer();
-      employees.push(engineer);
-      anotherEmployee();
+      promptEngineer().then((engineer) => {
+        employees.push(engineer);
+        anotherEmployee();
+      })
+      
     } else if (teamPrompt.employeeType === 'Intern') {
-      const intern = promptIntern();
-      employees.push(intern);
-      anotherEmployee();
+      promptIntern().then((intern) => {
+        employees.push(intern);
+        anotherEmployee();
+      })
     } else {
+      console.log(employees);
       return
     }
   })
@@ -91,8 +92,8 @@ const promptEngineer = () => {
       name: 'engineerGitHub'
     },
   ]).then((engineerPrompt) => {
-    const {engineerName, engineerId, engineerEmail, engineerSchool} = engineerPrompt;
-    const engineer = new Engineer(engineerName, engineerId, engineerEmail, engineerSchool);
+    const {engineerName, engineerId, engineerEmail, engineerGitHub} = engineerPrompt;
+    const engineer = new Engineer(engineerName, engineerId, engineerEmail, engineerGitHub);
     return engineer
   })
 }
