@@ -3,7 +3,9 @@ const fs = require('fs');
 const Manager = require('./lib/Manager.js');
 const Intern = require('./lib/Intern.js');
 const Engineer = require('./lib/Engineer.js');
+const {buildHtml} = require('./src/template.js')
 const employees = [];
+const distDir = './dist';
 
 const init = () => {
   return inquirer.prompt([
@@ -33,8 +35,17 @@ const init = () => {
     const {managerName, managerId, managerEmail, managerOfficeNumber} = managerPrompt;
     const manager = new Manager(managerName, managerId, managerEmail, managerOfficeNumber);
     employees.push(manager);
-    anotherEmployee();
-  })
+    anotherEmployee().then(() => {
+      const html = buildHtml(employees);
+      if (!fs.existsSync(distDir)) {
+        fs.mkdirSync(distDir)
+      }
+      fs.writeFile(`${distDir}/team.html`, html, (err) => {
+        err ? console.log(err) : console.log('Successfully created team!')
+      });
+      return;
+    });
+  });
 }
 
 init()
@@ -50,15 +61,15 @@ const anotherEmployee = () => {
   ]).then((teamPrompt) => {
 
     if (teamPrompt.employeeType === 'Engineer') {
-      promptEngineer().then((engineer) => {
+      return promptEngineer().then((engineer) => {
         employees.push(engineer);
-        anotherEmployee();
+        return anotherEmployee();
       })
       
     } else if (teamPrompt.employeeType === 'Intern') {
-      promptIntern().then((intern) => {
+      return promptIntern().then((intern) => {
         employees.push(intern);
-        anotherEmployee();
+        return anotherEmployee();
       })
     } else {
       console.log(employees);

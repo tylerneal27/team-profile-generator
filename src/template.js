@@ -1,7 +1,8 @@
 const buildTeam = employees => {
     const buildEngineer = (engineer) => {
         return `
-        <div class="card" style="width: 18rem;">
+        <div>
+          <div class="card" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">${engineer.getName()}</h5>
               <p class="card-text"><i class="fas fa-glasses"></i> Engineer</p>
@@ -12,25 +13,30 @@ const buildTeam = employees => {
               <li class="list-group-item"><a href="https://gitbub.com/${engineer.getGitHub()}">GitHub: ${engineer.getGitHub()}</a></li>
             </ul>
           </div>
+          </div>
         `
     }
     const buildManager = (manager) => {
-        return `<div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">${manager.getName()}</h5>
-          <p class="card-text"><i class="fas fa-mug-hot"></i> Manager</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Id: ${manager.getId()}</li>
-          <li class="list-group-item"><a href="mailto:${manager.getEmail()}">Email: ${manager.getEmail()}</a></li>
-          <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
-        </ul>
-      </div>
+        return `
+        <div>
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">${manager.getName()}</h5>
+              <p class="card-text"><i class="fas fa-mug-hot"></i> Manager</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Id: ${manager.getId()}</li>
+              <li class="list-group-item"><a href="mailto:${manager.getEmail()}">Email: ${manager.getEmail()}</a></li>
+              <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
+            </ul>
+          </div>
+          </div>
       ` 
     }
     const buildIntern = (intern) => {
         return `
-        <div class="card" style="width: 18rem;">
+        <div>
+          <div class="card" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">${intern.getName()}</h5>
               <p class="card-text"><i class="fas fa-user-graduate"></i> Intern</p>
@@ -41,41 +47,37 @@ const buildTeam = employees => {
               <li class="list-group-item">School: ${intern.getSchool()}</li>
             </ul>
           </div>
+          </div>
         `
     }
 
-    let HTML = [];
+    let html = '';
 
-    let newManager = employees.filter(employee => {
-        employee.getRole === 'Manager'
+    employees.filter(employee => {
+        return employee.getRole() === 'Manager'
     }).map(manager => {
-        buildManager(manager)
-    }).join('')
-    HTML.push(newManager)
-
-    return HTML.join('');
-
-    let newIntern = intern.filter(employee => {
-        employee.getRole === 'Intern'
-    }).map(intern => {
-        buildIntern(intern)
-    }).join('')
-    HTML.push(newIntern)
+       html += buildManager(manager)
+    })
     
-    return HTML.join('');
 
-    let newEngineer = employees.filter(employee => {
-        employee.getRole === 'Engineer'
+
+    employees.filter(employee => {
+        return employee.getRole() === 'Intern'
+    }).map(intern => {
+        html += buildIntern(intern)
+    })
+    
+
+    employees.filter(employee => {
+        return employee.getRole() === 'Engineer'
     }).map(engineer => {
-        buildEngineer(engineer)
-    }).join('')
-    HTML.push(newEngineer)
+        html += buildEngineer(engineer)
+    })
 
-
-    return HTML.join('');
+    return html;
 }
 
-module.exports = employees => {
+  const buildHtml = (employees)  => {
     return `
     <!doctype html>
 <html lang="en">
@@ -92,13 +94,14 @@ module.exports = employees => {
   </head>
   <body>
     <header class="p-3 mb-2 bg-success text-white"><h1>My Team</h1></header>
-    <div class="container">
+    <div class="container-fluid">
         ${buildTeam(employees)}
     </div>
-    
-
-   
   </body>
 </html>
     `
 }
+
+module.exports = {
+  buildHtml
+};
