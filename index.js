@@ -72,7 +72,6 @@ const anotherEmployee = () => {
         return anotherEmployee();
       })
     } else {
-      console.log(employees);
       return
     }
   })
