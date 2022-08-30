@@ -1,9 +1,9 @@
 const buildTeam = employees => {
     const buildEngineer = (engineer) => {
         return `
-        <div>
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
+        <div class="col">
+          <div class="card mb-4" style="width: 18rem;">
+            <div class="card-body text-white bg-primary">
               <h5 class="card-title">${engineer.getName()}</h5>
               <p class="card-text"><i class="fas fa-glasses"></i> Engineer</p>
             </div>
@@ -18,9 +18,9 @@ const buildTeam = employees => {
     }
     const buildManager = (manager) => {
         return `
-        <div>
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
+        <div class="col">
+          <div class="card mb-4" style="width: 18rem;">
+            <div class="card-body text-white bg-primary">
               <h5 class="card-title">${manager.getName()}</h5>
               <p class="card-text"><i class="fas fa-mug-hot"></i> Manager</p>
             </div>
@@ -35,9 +35,9 @@ const buildTeam = employees => {
     }
     const buildIntern = (intern) => {
         return `
-        <div>
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
+        <div class="col">
+          <div class="card mb-4" style="width: 18rem;">
+            <div class="card-body text-white bg-primary">
               <h5 class="card-title">${intern.getName()}</h5>
               <p class="card-text"><i class="fas fa-user-graduate"></i> Intern</p>
             </div>
@@ -95,7 +95,9 @@ const buildTeam = employees => {
   <body>
     <header class="p-3 mb-2 bg-success text-white"><h1>My Team</h1></header>
     <div class="container-fluid">
+        <div class="row">
         ${buildTeam(employees)}
+        </div>
     </div>
   </body>
 </html>
